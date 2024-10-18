@@ -1,0 +1,157 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.ebill-heading {
+    font-size: 1.5em;
+    color: #333;
+    margin-left: 20px;     /* Left align the heading */
+    margin-bottom: 15px;   /* Add space below the heading */
+    margin-top: 10px;      /* Optional: add some space at the top */
+    font-weight: bold;
+}
+
+/* Navbar */
+header {
+    background-color: grey;
+    padding: 10px 20px;
+}
+
+.navbar {
+    
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px 0;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+/* Welcome and Logout Section */
+.welcome-section {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px; /* Padding to move it away from the right edge */
+    margin-right: 20px;  /* Adds margin from the right edge */
+    margin-top: 10px;    /* Add a little space between welcome section and navbar */
+}
+.welcome-section span {
+    margin-right: 10px;  /* Space between "Welcome XXXX" and the button */
+}
+
+.welcome-section button {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+/* Form Section */
+.complaint-form-section {
+    background-color: white;
+    padding: 20px;
+    margin: 40px auto;
+    max-width: 900px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.complaint-form-section h2 {
+    margin-bottom: 20px;
+    background-color: #007ACB;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px 8px 0 0;
+}
+
+/* Form Layout */
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    flex: 0 0 45%;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.form-group textarea {
+    height: 60px;
+}
+
+/* Buttons */
+.form-buttons {
+    display: flex;
+    justify-content: center;  /* Center align buttons horizontally */
+    gap: 20px;                /* Space between the buttons */
+    margin-top: 20px;          /* Space above the buttons */
+}
+
+.form-buttons button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#cancelBtn {
+    background-color: #888;
+    color: white;
+}
+
+#submitComplaint {
+    background-color: #007ACB;
+    color: white;
+    border-radius: 5px;
+}
+
+/* Required fields style */
+.form-group label::after {
+    content: "*";
+    color: orange;
+    margin-left: 5px;
+}

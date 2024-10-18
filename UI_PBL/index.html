@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <h3 class="ebill-heading">Quick EBill</h3>
+    <header>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Pay Bill</a></li>
+                <li><a href="#">Register Complaint</a></li>
+                <li><a href="index2.html">Complaint Status</a></li>
+            </ul>
+        </nav>
+
+        
+    </header>
+    <!-- Welcome and Logout outside the Navbar -->
+    <div class="welcome-section">
+        <span>Welcome: <span id="customerID"><b>XXXX</b></span></span>
+        <button id="logoutBtn">LOGOUT</button>
+    </div>
+
+    <!-- Complaint Form -->
+    <section class="complaint-form-section">
+        <h2>File New Complaint</h2>
+        <form id="complaintForm">
+            <div class="row">
+                <div class="column">
+                    <div class="form-group">
+                        <label for="serviceType">Complaint/Service Type</label>
+                        <select id="serviceType" onchange="updateCategory()">
+                            <option value="Street Light">STREET LIGHT RELATED</option>
+                            <option value="Billing">BILLING RELATED</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category">
+                            <!-- Categories updated via JavaScript -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactPerson">Contact Person <span class="info-icon">:</span></label>
+                        <input type="text" id="contactPerson" placeholder="Contact Person">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mobileNo">* Mobile Number</label>
+                        <input type="text" id="mobileNo" maxlength="10" placeholder="Mobile Number">
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="form-group">
+                        <label for="landmark">Landmark</label>
+                        <input type="text" id="landmark" placeholder="Landmark">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="consumerNo">Consumer Number</label>
+                        <input type="text" id="consumerNo" maxlength="13" placeholder="Consumer Number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="problemDesc">* Problem Description</label>
+                        <textarea id="problemDesc" placeholder="Describe the problem"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea id="address" placeholder="Address"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-buttons">
+                <button type="button" id="cancelBtn" onclick="resetForm()">Cancel</button>
+                <button type="submit" id="submitComplaint">Submit Complaint</button>
+            </div>
+        </form>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

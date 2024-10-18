@@ -1,0 +1,23 @@
+101|Umesh Agarwal|normal|service|new delhi|1234567890|active
+102|Vishal Agarwal|abnormal|security|noida|1234567891|inactive
+101|Umesh Agarwal|normal|service|new delhi|1234567890|active
+101|Umesh Agarwal|normal|service|new delhi|1234567890|active
+
+
+ awk 'BEGIN{FS="|";c=0}{if($7=="active"){c=c+1;}}END{if(c==0){print "no active user"}else{print "active users:" c}}' Complaints.txt
+
+
+
+101|umesh agarwal|1234567890|new delhi|2000|online
+1101132490783|vishal agrwal|1234567890|noida|30000|online
+
+awk 'BEGIN{FS="|";flag=0}{if($1=="1101132490783"){flag=1;print $1 "| "$2"| "$5"| "$6;}}END{if(flag==0){print "Consumer Not Found"}}' bill.txt
+
+
+
+
+101|umesh agarwal|1000|2000|3000|4000|5000
+106|vishal agarwal|3000|2000|3000|4000|5000
+103|rahul agarwal|10000|2000|3000|4000|5000
+104|vinod agarwal|1000|8000|3000|4000|5000
+awk 'BEGIN{FS="|";average=0}{average=($3 + $4 + $5 + $6 + $7)/5;print average "|" $1 "|" $2;}END{}' bill1.txt | sort -r|  awk 'BEGIN{FS="|"}{print $2 "|" $3 "|" $1;}END{}'

@@ -1,0 +1,211 @@
+
+|--------------| SQL USER STORIES GROUP-6 |---------------|
+
+
+
+--------------------USER STORY 1--------------------------
+
+CREATE TABLE Customers (
+    ConsumerID INTEGER NOT NULL,
+    CustomerName VARCHAR(50) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
+    MobileNumber VARCHAR(10) NOT NULL,
+    UserID VARCHAR(20) NOT NULL CHECK(LENGTH(UserID) >= 5),
+    Password VARCHAR(30) NOT NULL,
+    ConfirmPassword VARCHAR(30) NOT NULL,
+    Status VARCHAR(8) CHECK(Status IN ('Active', 'Inactive')),
+    PRIMARY KEY (ConsumerID),
+    CONSTRAINT check_passwords_match CHECK (Password = ConfirmPassword)
+);
+
+
+
+INSERT INTO Customers (ConsumerID, CustomerName, Email, MobileNumber, UserID, Password, ConfirmPassword, Status) 
+VALUES (1000000000001, 'Rahul Sharma', 'rahul.sharma@example.com', '9876543210', 'rahulsh', 'Password123!', 'Password123!', 'Active');
+INSERT INTO Customers (ConsumerID, CustomerName, Email, MobileNumber, UserID, Password, ConfirmPassword, Status) 
+VALUES(1000000000002, 'Priya Gupta', 'priya.gupta@example.com', '9876543211', 'priyag123', 'Password@789', 'Password@789', 'Inactive');
+INSERT INTO Customers (ConsumerID, CustomerName, Email, MobileNumber, UserID, Password, ConfirmPassword, Status) 
+VALUES(1000000000003, 'Amit Mehra', 'amit.mehra@example.com', '9876543212', 'amit_m', 'Pass@word1', 'Pass@word1', 'Active');
+INSERT INTO Customers (ConsumerID, CustomerName, Email, MobileNumber, UserID, Password, ConfirmPassword, Status) 
+VALUES(1000000000004, 'Simran Kaur', 'simran.kaur@example.com', '9876543213', 'simran12', 'Simran@1234', 'Simran@1234', 'Active');
+INSERT INTO Customers (ConsumerID, CustomerName, Email, MobileNumber, UserID, Password, ConfirmPassword, Status) 
+VALUES(1000000000005, 'Anil Yadav', 'anil.yadav@example.com', '9876543214', 'anil_ya', 'Anil#pass', 'Anil#pass', 'Inactive');
+
+
+
+-------------------------USER STORY 2----------------------
+
+ALTER TABLE Customers
+ADD Title VARCHAR2(10);
+
+ALTER TABLE Customers
+ADD BillNumber INTEGER NOT NULL;
+
+-- Add the CHECK constraint separately for the Title column
+ALTER TABLE Customers
+ADD CONSTRAINT chk_title CHECK (Title IN ('Mr', 'Ms', 'Mrs', 'Dr', 'Prof'));
+
+
+
+-------------------------USER STORY 3----------------------
+
+
+CREATE TABLE Customers (
+    ConsumerID INTEGER NOT NULL, 
+    CustomerName VARCHAR(50) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
+    MobileNumber VARCHAR(10) NOT NULL,
+    UserID VARCHAR(20) NOT NULL CHECK(LENGTH(UserID) >= 5),
+    Password VARCHAR(30) NOT NULL,
+    ConfirmPassword VARCHAR(30) NOT NULL,
+    Status VARCHAR(8) CHECK(Status IN ('Active', 'Inactive')),
+    Title VARCHAR(10) CHECK(Title IN ('Mr', 'Ms', 'Mrs', 'Dr', 'Prof')),
+    BillNumber INT NOT NULL,
+    PRIMARY KEY (ConsumerID)
+);
+
+
+INSERT INTO Customers (ConsumerID, CustomerName, Email, MobileNumber, UserID, Password, ConfirmPassword, Status, Title, BillNumber) 
+VALUES (1000000000001, 'Rahul Sharma', 'rahul.sharma@example.com', '9876543210', 'rahulsh', 'Password123!', 'Password123!', 'Active', 'Mr', 43210);
+INSERT INTO Customers (ConsumerID, CustomerName, Email, MobileNumber, UserID, Password, ConfirmPassword, Status, Title, BillNumber) 
+VALUES (1000000000002, 'Priya Gupta', 'priya.gupta@example.com', '9876543211', 'priyag123', 'Password@789', 'Password@789', 'Inactive', 'Ms', 43211);
+INSERT INTO Customers (ConsumerID, CustomerName, Email, MobileNumber, UserID, Password, ConfirmPassword, Status, Title, BillNumber) 
+VALUES (1000000000003, 'Amit Mehra', 'amit.mehra@example.com', '9876543212', 'amit_m', 'Pass@word1', 'Pass@word1', 'Active', 'Mr', 43212);
+INSERT INTO Customers (ConsumerID, CustomerName, Email, MobileNumber, UserID, Password, ConfirmPassword, Status, Title, BillNumber) 
+VALUES (1000000000004, 'Simran Kaur', 'simran.kaur@example.com', '9876543213', 'simran12', 'Simran@1234', 'Simran@1234', 'Active', 'Ms', 43213);
+INSERT INTO Customers (ConsumerID, CustomerName, Email, MobileNumber, UserID, Password, ConfirmPassword, Status, Title, BillNumber) 
+VALUES (1000000000005, 'Anil Yadav', 'anil.yadav@example.com', '9876543214', 'anil_ya', 'Anil#pass', 'Anil#pass', 'Inactive', 'Mr', 43214);
+
+SELECT ConsumerID AS CustomerId, CustomerName, Email
+FROM Customers
+WHERE CustomerName LIKE '%a'
+ORDER BY CustomerName DESC;
+
+
+------------------USER STORY 4--------------------------
+
+
+CREATE TABLE CustomerBills (
+    ConsumerID INTEGER NOT NULL, 
+    CustomerName VARCHAR(50) NOT NULL,
+    Address VARCHAR(255) NOT NULL,
+    City VARCHAR(50) NOT NULL,
+    BillAmount DECIMAL(10, 2) NOT NULL,
+    PRIMARY KEY (ConsumerID, BillAmount)
+);
+
+INSERT INTO CustomerBills (ConsumerID, CustomerName, Address, City, BillAmount)
+VALUES(1000000000001, 'Rahul Sharma', '123 Main St', 'Delhi', 1500.00);
+INSERT INTO CustomerBills (ConsumerID, CustomerName, Address, City, BillAmount)
+VALUES(1000000000001, 'Rahul Sharma', '123 Main St', 'Delhi', 1800.50);
+INSERT INTO CustomerBills (ConsumerID, CustomerName, Address, City, BillAmount)
+VALUES(1000000000001, 'Rahul Sharma', '123 Main St', 'Delhi', 2000.75);
+
+INSERT INTO CustomerBills (ConsumerID, CustomerName, Address, City, BillAmount)
+VALUES(1000000000002, 'Priya Gupta', '456 Elm St', 'Mumbai', 2500.00);
+INSERT INTO CustomerBills (ConsumerID, CustomerName, Address, City, BillAmount)
+VALUES(1000000000002, 'Priya Gupta', '456 Elm St', 'Mumbai', 2700.25);
+
+INSERT INTO CustomerBills (ConsumerID, CustomerName, Address, City, BillAmount)
+VALUES(1000000000003, 'Amit Mehra', '789 Oak St', 'Bangalore', 3000.00);
+INSERT INTO CustomerBills (ConsumerID, CustomerName, Address, City, BillAmount)
+VALUES(1000000000003, 'Amit Mehra', '789 Oak St', 'Bangalore', 3200.10);
+
+INSERT INTO CustomerBills (ConsumerID, CustomerName, Address, City, BillAmount)
+VALUES(1000000000004, 'Simran Kaur', '101 Pine St', 'Delhi', 3500.50);
+INSERT INTO CustomerBills (ConsumerID, CustomerName, Address, City, BillAmount)
+VALUES(1000000000004, 'Simran Kaur', '101 Pine St', 'Delhi', 2200.75);
+
+INSERT INTO CustomerBills (ConsumerID, CustomerName, Address, City, BillAmount)
+VALUES(1000000000005, 'Anil Yadav', '202 Cedar St', 'Kolkata', 4000.00);
+
+SELECT City, AVG(BillAmount) AS AverageBill
+FROM CustomerBills
+GROUP BY City
+ORDER BY AverageBill DESC;
+
+
+----------------------USER STORY 5-----------------------
+
+
+CREATE TABLE Consumers (
+    ConsumerID INTEGER NOT NULL,
+    ConsumerName VARCHAR(50) NOT NULL,
+    Address VARCHAR(255) NOT NULL,
+    City VARCHAR(50) NOT NULL,
+    PRIMARY KEY (ConsumerID)
+);
+
+CREATE TABLE MonthlyBillJune (
+    BillID INTEGER NOT NULL,
+    ConsumerID NUMBER NOT NULL,
+    BillAmount DECIMAL(10, 2) NOT NULL,
+    PaidStatus VARCHAR(10) NOT NULL CHECK (PaidStatus IN ('Paid', 'Unpaid')),
+    BillDate DATE NOT NULL,
+    PRIMARY KEY (BillID),
+    FOREIGN KEY (ConsumerID) REFERENCES Consumers(ConsumerID)
+);
+
+-- Insert data into Consumers table
+INSERT INTO Consumers (ConsumerID, ConsumerName, Address, City) 
+VALUES (1000000000001, 'Rahul Sharma', '123 Main St', 'Delhi');
+INSERT INTO Consumers (ConsumerID, ConsumerName, Address, City) 
+VALUES(1000000000002, 'Priya Gupta', '456 Elm St', 'Mumbai');
+INSERT INTO Consumers (ConsumerID, ConsumerName, Address, City) 
+VALUES(1000000000003, 'Amit Mehra', '789 Oak St', 'Bangalore');
+INSERT INTO Consumers (ConsumerID, ConsumerName, Address, City) 
+VALUES(1000000000004, 'Simran Kaur', '101 Pine St', 'Delhi');
+INSERT INTO Consumers (ConsumerID, ConsumerName, Address, City) 
+VALUES(1000000000005, 'Anil Yadav', '202 Cedar St', 'Kolkata');
+INSERT INTO Consumers (ConsumerID, ConsumerName, Address, City) 
+VALUES(1000000000006, 'Ravi Singh', '303 Maple St', 'Chennai');
+INSERT INTO Consumers (ConsumerID, ConsumerName, Address, City) 
+VALUES(1000000000007, 'Sonia Rao', '404 Birch St', 'Hyderabad');
+INSERT INTO Consumers (ConsumerID, ConsumerName, Address, City) 
+VALUES(1000000000008, 'Vikram Arora', '505 Cedar St', 'Delhi');
+INSERT INTO Consumers (ConsumerID, ConsumerName, Address, City) 
+VALUES(1000000000009, 'Neha Joshi', '606 Walnut St', 'Mumbai');
+INSERT INTO Consumers (ConsumerID, ConsumerName, Address, City) 
+VALUES(1000000000010, 'Manish Kumar', '707 Ash St', 'Bangalore');
+
+
+INSERT INTO MonthlyBillJune (BillID, ConsumerID, BillAmount, PaidStatus, BillDate)
+VALUES(141, 1000000000001, 1500.00, 'Paid', TO_DATE('15-06-2024', 'DD-MM-YYYY'));
+
+INSERT INTO MonthlyBillJune (BillID, ConsumerID, BillAmount, PaidStatus, BillDate)
+VALUES(142, 1000000000002, 1800.50, 'Unpaid', TO_DATE('16-06-2024', 'DD-MM-YYYY'));
+
+INSERT INTO MonthlyBillJune (BillID, ConsumerID, BillAmount, PaidStatus, BillDate)
+VALUES(143, 1000000000003, 2000.75, 'Paid', TO_DATE('17-06-2024', 'DD-MM-YYYY'));
+
+INSERT INTO MonthlyBillJune (BillID, ConsumerID, BillAmount, PaidStatus, BillDate)
+VALUES(144, 1000000000004, 2500.00, 'Unpaid', TO_DATE('18-06-2024', 'DD-MM-YYYY'));
+
+INSERT INTO MonthlyBillJune (BillID, ConsumerID, BillAmount, PaidStatus, BillDate)
+VALUES(145, 1000000000005, 2700.25, 'Paid', TO_DATE('19-06-2024', 'DD-MM-YYYY'));
+
+INSERT INTO MonthlyBillJune (BillID, ConsumerID, BillAmount, PaidStatus, BillDate)
+VALUES(146, 1000000000006, 3000.00, 'Unpaid', TO_DATE('20-06-2024', 'DD-MM-YYYY'));
+
+INSERT INTO MonthlyBillJune (BillID, ConsumerID, BillAmount, PaidStatus, BillDate)
+VALUES(147, 1000000000007, 3200.10, 'Paid', TO_DATE('21-06-2024', 'DD-MM-YYYY'));
+
+INSERT INTO MonthlyBillJune (BillID, ConsumerID, BillAmount, PaidStatus, BillDate)
+VALUES(148, 1000000000008, 3500.50, 'Unpaid', TO_DATE('22-06-2024', 'DD-MM-YYYY'));
+
+INSERT INTO MonthlyBillJune (BillID, ConsumerID, BillAmount, PaidStatus, BillDate)
+VALUES(149, 1000000000009, 4000.75, 'Paid', TO_DATE('23-06-2024', 'DD-MM-YYYY'));
+
+INSERT INTO MonthlyBillJune (BillID, ConsumerID, BillAmount, PaidStatus, BillDate)
+VALUES(150, 1000000000010, 2200.50, 'Unpaid', TO_DATE('24-06-2024', 'DD-MM-YYYY'));
+
+SELECT ConsumerID, ConsumerName
+FROM Consumers
+WHERE ConsumerID IN (
+    SELECT ConsumerID 
+    FROM MonthlyBillJune 
+    WHERE PaidStatus = 'Unpaid'
+);
+
+------------------------------------------------------------------------------------
+
